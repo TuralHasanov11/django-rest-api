@@ -1,0 +1,18 @@
+{% extends 'app.html' %}
+
+{% block content %}
+
+<div class="col-lg-7 offset-lg-1">
+    <h1>{{post.title}}</h1>
+    <img width="250px" height="200px" src="{{post.image.url}}" alt="">
+    <p>{{post.body|safe}}</p>
+    <small>{{post.updated_at}}</small>
+</div>
+
+<hr>
+
+{% if request.user.is_authenticated and post.author == request.user %}
+<a href="{% url 'blog:edit' post.slug %}">Edit</a>
+{% endif %}
+
+{% endblock content %}

@@ -1,0 +1,39 @@
+{% extends 'app.html' %}
+
+{% block content %}
+
+<h1>Profile</h1>
+
+<form action="{% url 'profile' %}" method="post">
+   
+     <div class="form-group">
+        <input type="email" name="email" id="email" class="form-control" required value="{{profile_form.initial.email}}">
+        <input type="text" name="username" id="username" class="form-control" required value="{{profile_form.initial.username}}">
+    </div>
+    {% for field in profile_form %}
+        {% for error in field.errors %}
+            <small style="color: tomato;">{{error}}</small>
+        {% endfor %}
+    {% endfor%}
+
+    {% if profile_form.nonfield_errors %}
+        <p style="color:tomato">{{profile_form.nonfield_errors}}</p>
+    {% endif %}
+
+    {% csrf_token %}
+    <button type="submit">Update</button>
+</form>
+
+<p><a href="{% url 'password_change'%}">Change Password</a></p>
+
+<div class="row p-4">
+    {% for post in posts %}
+    <div class="post col-12">
+        <a href="{% url 'blog:detail' post.slug %}">
+            <li class="list-group-item">{{post}}</li>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}

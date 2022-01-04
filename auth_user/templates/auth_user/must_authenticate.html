@@ -1,0 +1,13 @@
+{% extends 'app.html' %}
+
+{% block content %}
+
+<h1>Must authenticate to view this page</h1>
+<p>
+    <a href="{% url 'register'%}">Register</a>
+    <a href="{% url 'login'%}">Login</a>
+</p>
+
+
+
+{% endblock content %}

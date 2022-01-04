@@ -1,0 +1,10 @@
+<div class="col col-12 blog-post my-2">
+    <div class="card card-body">
+        <h5 class="card-title"><a href="{% url 'blog:detail' post.slug %}">{{post.title}}</a></h5>
+        <img src="{{post.image.url}}" width="250px" height="200px">
+        <p>{{post.body|safe|truncatechars:250}}...</p>
+        {% if post.author == request.user %}
+        <a href="{% url 'blog:edit' post.slug %}">Edit</a>
+        {% endif %}
+    </div>
+</div>

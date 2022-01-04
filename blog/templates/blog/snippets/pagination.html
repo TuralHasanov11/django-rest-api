@@ -1,0 +1,19 @@
+{% if posts.has_other_pages %}
+
+    {% if posts.has_previous %}
+    <a href="?{% if query %}q={{query}}&{% endif %}page=1" class="btn btn-info mb-4">First</a>
+    <a href="?{% if query %}q={{query}}&{% endif %}page={{posts.previous_page_number}}" class="btn btn-info mb-4">Prev</a>
+    {% endif %}
+    {% for num in posts.paginator.page_range %}
+    {% if posts.number == num %}
+        <a href="?{% if query %}q={{query}}&{% endif %}page={{num}}" class="btn btn-info mb-4">{{num}}</a>
+    {% elif num > posts.number|add:'-3' and num < posts.number|add:'3'%}
+    <a href="?{% if query %}q={{query}}&{% endif %}page={{num}}" class="btn btn-info mb-4">{{num}}</a>
+    {% endif %}
+    {% endfor %}
+    {% if posts.has_next %}
+    <a href="?{% if query %}q={{query}}&{% endif %}page={{posts.next_page_number}}" class="btn btn-info mb-4">Next</a>
+    <a href="?{% if query %}q={{query}}&{% endif %}page={{posts.paginator.num_pages}}" class="btn btn-info mb-4">Last</a>
+    {% endif %}
+
+{% endif %}
